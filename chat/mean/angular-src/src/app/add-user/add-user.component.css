@@ -1,0 +1,81 @@
+form_container{
+  margin : 0 auto;
+  width:400px;
+}
+
+form {
+  background: white;
+  width: 350px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
+  margin-bottom: 20px;
+  font-family: lato;
+  position: relative;
+  color: #333;
+  border-radius: 10px;
+}
+
+form header {
+  background: #3498db;
+  padding: 4px 2px;
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+  border-radius: 10px 10px 0 0;
+}
+
+form label {
+  margin-left: 6px;
+  display: inline-block;
+  margin-top: 9px;
+  margin-bottom: 3px;
+  position: relative;
+}
+
+form label span {
+  color: #3498db;
+  font-size: 13px;
+  position: absolute;
+  left: 2.3em;
+  top: -10px;
+}
+form input,select {
+  display: block;
+  width: 50%;
+  margin-left: 20px;
+  padding: 5px 20px;
+  font-size: 13px;
+  border-radius: 3px;
+  outline: none;
+  border: 1px solid #ccc;
+}
+
+form .help {
+  margin-left: 20px;
+  font-size: 0.8em;
+  color: #777;
+}
+
+form button {
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-family: inherit;
+  color: white;
+  background: #3498db;
+  outline: none;
+  border: none;
+  padding: 4px 9px;
+  font-size: 1.3em;
+  font-weight: 400;
+  border-radius: 3px;
+  box-shadow: 0px 0px 10px rgba(51, 51, 51, 0.4);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+form button:hover {
+  background: #3498db;
+}
+
+/* taken from internet */

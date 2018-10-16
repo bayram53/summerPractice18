@@ -1,0 +1,18 @@
+*{
+    font-size:20px;
+    background-color: aliceblue;
+    text-align: left;
+}
+body{
+    padding:50px;
+}
+
+#field1{
+    border-color: black;
+    margin:3px;
+}
+
+#field2{
+    border-color: black;
+    margin:3px;
+}

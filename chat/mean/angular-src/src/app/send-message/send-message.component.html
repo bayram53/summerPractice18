@@ -1,0 +1,15 @@
+<div class="form_container">
+  <form [formGroup]="formdata" (ngSubmit) = "send(formdata.value)" >
+    <header>New user info</header>
+
+    <label>Username <span></span></label>
+    <input type="text" name="username" formControlName="username"/>
+
+    <label>Message <span></span></label>
+    <input type="text" name="message" formControlName="message"/>
+
+    <button value="send">Send</button>
+  </form>
+
+  <div class="blog-post">{{result}}</div>
+</div>

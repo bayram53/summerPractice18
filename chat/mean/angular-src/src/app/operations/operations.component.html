@@ -1,0 +1,15 @@
+<div>
+  <p>Hello {{getUsername()}}</p>
+
+  <button class="btn" (click)="navigate('operations/message')" id="output" >Send Message</button>
+  <button class="btn" (click)="navigate('operations/inbox')" >Inbox</button>
+  <button class="btn" (click)="navigate('operations/outbox')" >Outbox</button>
+  <button *ngIf="Server.isAdmin()" class="btn" (click)="navigate('operations/add')" >Add User</button>
+  <button *ngIf="Server.isAdmin()" class="btn" (click)="navigate('operations/rud')" >Users</button>
+  <button *ngIf="Server.isAdmin()" class="btn" (click)="navigate('operations/log')" >History</button>
+
+  <router-outlet class="output"></router-outlet>
+
+  <br><br><br><br>
+  <button class="btn" (click)="exit()" >Exit</button>
+</div>

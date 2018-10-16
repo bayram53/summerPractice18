@@ -1,0 +1,14 @@
+<div class="form_container">
+  <form [formGroup]="formdata" (ngSubmit) = "login(formdata.value)" >
+    <header>Login</header>
+    <label>Username <span></span></label>
+    <input type="text" name="uname" formControlName="uname"/>
+
+    <label>Password <span></span></label>
+    <input type="password" class="fortextbox" name="passwd" formControlName="passwd"/>
+
+    <button value="Login">Login</button>
+  </form>
+
+  <div id="result">{{result}}</div>
+</div>

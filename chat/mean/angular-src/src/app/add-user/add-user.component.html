@@ -1,0 +1,31 @@
+<div class="form_container">
+  <form [formGroup]="formdata" (ngSubmit) = "add(formdata.value)" >
+    <header>New user info</header>
+
+    <label>Username <span></span></label>
+    <input type="text" name="username" formControlName="username"/>
+
+    <label>Name <span></span></label>
+    <input type="text" name="name" formControlName="name"/>
+
+    <label>Surname <span></span></label>
+    <input type="text" name="surname" formControlName="surname"/>
+
+    <label>Email <span></span></label>
+    <input type="text" name="email" formControlName="email"/>
+
+    <label>Type <span></span></label>
+    <select type="text" name="type" formControlName="type">
+      <option value="user">User</option>
+      <option value="admin">Admin</option>
+    </select>
+
+
+    <label>Password <span></span></label>
+    <input type="text" name="password" formControlName="password"/>
+
+    <button value="add">Add user</button>
+  </form>
+
+  <div class="blog-post">{{result}}</div>
+</div>

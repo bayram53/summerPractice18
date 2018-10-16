@@ -1,0 +1,33 @@
+<div>
+
+  <p>{{info}}</p>
+  <p>{{info1}}</p>
+
+  <table class="users">
+    <thead>
+    <tr>
+      <th><button class='head' (click)="sort('username')">Username</button></th>
+      <th><button class='head' (click)="sort('name')">Name</button></th>
+      <th><button class='head' (click)="sort('surname')">Surname</button></th>
+      <th><button class='head' (click)="sort('email')">Email</button></th>
+      <th><button class='head' (click)="sort('type')">Type</button></th>
+      <th><button class='head' (click)="sort('password')">Password</button></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let i of users| orderBy: sorting; let j=index; trackBy: trackByFn" [formGroup]="getForm(j)">
+        <td>{{i.username}}</td>
+        <td><input type="text" name="name" value={{i.name}} formControlName="name"></td>
+        <td><input type="text" name="surname" value={{i.surname}} formControlName="surname"></td>
+        <td><input type="text" name="email" value={{i.email}} formControlName="email"></td>
+        <td><input type="text" name="type" value={{i.type}} formControlName="type"></td>
+        <td><input type="text" name="password" value={{i.password}} formControlName="password"></td>
+        <td><button (click)="update(formdata[j].value, j)">Update</button></td>
+        <td><button (click)="delete(formdata[j].value, j)">Delete</button></td>
+    </tr>
+    </tbody>
+
+  </table>
+
+</div>

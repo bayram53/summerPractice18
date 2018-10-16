@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="stylesIndex.css" type="text/css">
+</head>
+<body>
+
+Username : <input type="text" id="field1"><br><br>
+Password : <input type="password" id="field2"><br><br>
+
+<button onclick="myFunction()">Login</button>
+
+<br><br>
+<p id="output"></p>
+
+<script>
+  function myFunction() {
+    var newline = "<br>";
+
+    var xmlhttp = new XMLHttpRequest();
+    var username = document.getElementById('field1').value;
+    var password = document.getElementById('field2').value;
+
+    xmlhttp.open('POST', 'http://localhost:8080/service/mail', true);
+    var request = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:own=\"own\">\n" +
+      "   <soapenv:Header/>\n" +
+      "   <soapenv:Body>\n" +
+      "      <own:LoginRequest>\n" +
+      "         <own:username>" + username + "</own:username>\n" +
+      "         <own:password>" + password + "</own:password>\n" +
+      "      </own:LoginRequest>\n" +
+      "   </soapenv:Body>\n" +
+      "</soapenv:Envelope>";
+
+    xmlhttp.setRequestHeader('Content-Type', 'text/xml; charset=utf-8');
+    xmlhttp.setRequestHeader('SOAPAction', '"urn:thesecretserver.com/Authenticate"');
+
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState === 4) {
+
+        var id = "-1";
+        var result;
+
+        try {
+          var parser = new DOMParser();
+          var xmlDoc = parser.parseFromString(xmlhttp.responseText, "text/xml");
+
+          //var nodes = typeof xmlDoc.getElementsByTagNameNS != 'undefined' ? xmlDoc.getElementsByTagNameNS('own', 'LoginResponse') : xmlDoc.getElementsByTagName("own:LoginResponse");
+          var nodes = xmlDoc.getElementsByTagNameNS('own', 'LoginResponse');
+          id = nodes[0].getElementsByTagNameNS("own", "id")[0].childNodes[0].nodeValue;
+          result = nodes[0].getElementsByTagNameNS("own", "result")[0].childNodes[0].nodeValue;
+        } catch (e) {
+          console.log(e);
+        }
+
+        if(id === "-1"){
+          document.getElementById("output").innerText = result;
+        }
+        else {
+          document.getElementById("output").innerText = "Redirecting...";
+
+          setTimeout(function(){
+            window.sessionStorage["form-data"] = "id=" + id + "&username=" + username + "&tip=" + result;
+            window.location.href = "user.html";
+          }, 500);
+
+        }
+      }
+    };
+
+    //send the SOAP request
+    xmlhttp.send(request);
+  }
+</script>
+</body>
+</html>

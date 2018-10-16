@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+    <link rel="stylesheet" href="stylesUser.css" type="text/css">
+</head>
+<body>
+<script src="operations.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var userId = "";
+    var username="";
+    var tip;
+
+    window.onload=function Initialize() {
+        var tmp = new URL("http://www?" + window.sessionStorage["form-data"]);
+        userId = tmp.searchParams.get("id");
+        username = tmp.searchParams.get("username");
+        tip = tmp.searchParams.get("tip");
+        document.getElementById("greeting").innerHTML = "Hi " + username + "!";
+
+        if(tip === "2"){ // admin
+            var tmp = '<input type="radio" name="operation" value="addUser"/> Add User &emsp;' +
+                '<input type="radio" name="operation" value="getInfo"/> Get Users Info &emsp;' +
+                '<input type="radio" name="operation" value="deleteUser"/> Delete User &emsp;';
+            document.getElementById("other").innerHTML = tmp;
+        }
+
+        // next, attach the click event handler to the radio buttons
+        var radios = document.forms[0].elements["operation"];
+        for (var i = [0]; i < radios.length; i++)
+            radios[i].onclick=radioClicked;
+    }
+
+    function radioClicked() {
+        switch(this.value) {
+            case "write" :
+                document.getElementById('output').innerText = "";
+                document.getElementById('op').innerText = "";
+                var a = '<p id="message_result"></p>' +
+                    '<label for="send_username">Username:</label><select id="send_username"></select>' +
+                    '<label for="send_message">Message:</label><input type="text" id="send_message"/>' + newline +newline +
+                    '<button onclick="send(userId)">Send</button>';
+                document.getElementById("op").innerHTML = a;
+
+                getUsers(userId, 'send_username');
+
+                break;
+            case "readIn" :
+                document.getElementById('output').innerText = "";
+                document.getElementById('op').innerText = "";
+
+                getMessages(userId, "inbox", "output");
+
+                break;
+            case "readOut" :
+                document.getElementById('output').innerText = "";
+                document.getElementById('op').innerText = "";
+
+                getMessages(userId, "outbox", "output");
+                break;
+            case "addUser":
+                if(tip === "2"){
+                    document.getElementById('output').innerText = "";
+                    document.getElementById('op').innerText = "";
+
+                    var a = '<form id="addUser"> <p id="add_user_result"></p>' + newline +
+                        '<label for="add_user_username">Username:</label><input type="text" id="add_user_username">' +
+                        '<label for="add_user_name">Name:</label><input type="text" id="add_user_name">'  +
+                        '<label for="add_user_surname">Surname:</label><input type="text" id="add_user_surname">'  +
+                        '<label for="add_user_email">Email:</label><input type="text" id="add_user_email">'  +
+                        '<label for="add_user_type">Type:</label><input type="text" id="add_user_type">'  +
+                        '<label for="add_user_password">Password:</label><input type="text" id="add_user_password">'  + newline + newline +
+                        '</form><button onclick="addUser(userId)">Add user</button> ';
+                    document.getElementById('op').innerHTML = a;
+                }
+                break;
+            case "getInfo":
+                if(tip === "2"){
+                    document.getElementById('output').innerText = "";
+                    document.getElementById('op').innerText = "";
+
+                    var a = '<form id="getInfo"> <p id="get_info_result"></p>' + newline +
+                        '<label for="get_info_username">Username:</label><select id="get_info_username"></select>' + newline +newline +
+                        '</form><button onclick="getInfo(userId, \'output\')">Get Info</button> ';
+                    document.getElementById('op').innerHTML = a;
+
+                    getUsers(userId, 'get_info_username');
+                }
+                break;
+            case "deleteUser":
+                if(tip === "2"){
+                    document.getElementById('output').innerText = "";
+                    document.getElementById('op').innerText = "";
+
+                    var a = '<form id="deleteUser"> <p id="delete_user_result"></p>' + newline +
+                        '<label for="delete_user_username">Username:</label><select id="delete_user_username"></select>' + newline  + newline +
+                        '</form><button onclick="deleteUser(userId, \'output\')">Delete User</button> ';
+                    document.getElementById('op').innerHTML = a;
+                    getUsers(userId, 'delete_user_username');
+                }
+                break;
+        }
+
+    }
+
+</script>
+
+<p id="greeting"></p>
+
+<form id="all_operations">
+    <input type="radio" name="operation" value="write"/> Write Message &emsp;
+    <input type="radio" name="operation" value="readIn"/> Read Inbox &emsp;
+    <input type="radio" name="operation" value="readOut"/> Read Outbox &emsp;
+    <p id="other"></p>
+</form>
+
+<p id="op"></p>
+<p id="output"></p>
+<p id="gg"></p>
+
+<br><br><br>
+<button onclick="exitUser(userId)">Exit</button>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<div>
+
+  <p>{{info}}</p>
+
+  <table class="log">
+    <thead>
+    <tr>
+      <th><button class='head' (click)="sort('username')">Username</button></th>
+      <th><button class='head' (click)="sort('token')">Token</button></th>
+      <th><button class='head' (click)="sort('timeIn')">Time in</button></th>
+      <th><button class='head' (click)="sort('timeOut')">Time out</button></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let i of hist| orderBy: sorting">
+      <td>{{i.username}}</td>
+      <td>{{i.token}}</td>
+      <td>{{i.timeIn | date: "medium"}}</td>
+      <td>{{i.timeOut | date : "medium"}}</td>
+    </tr>
+    </tbody>
+
+  </table>
+
+</div>

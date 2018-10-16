@@ -1,0 +1,37 @@
+*{
+    font-size:20px;
+    background-color: aliceblue;
+    text-align: left;
+}
+body{
+    padding:50px;
+}
+
+#output{
+    border-color: black;
+}
+
+table, th, td{
+    border:1px groove black;
+}
+
+th {
+    cursor: pointer;
+}
+
+input[type="radio"].toggle {
+    display: compact;
+}
+
+input[type="text"].toggle {
+    display: compact;
+}
+
+label:after{
+    content:"\a";
+    white-space: pre;
+}
+
+label{
+    display: block;
+}
